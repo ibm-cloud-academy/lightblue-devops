@@ -9,17 +9,22 @@
             "description": "Deployment suffix",
             "type": "string"
         },
+        "deploy-region": {
+            "description": "Deploy to this IBM Cloud Region",
+            "type": "string"
+        },
         "deploy-org": {
-            "description": "Deploy to this Bluemix Organization",
+            "description": "Deploy to this IBM Cloud Organization",
             "type": "string"
         },
         "deploy-space": {
-            "description": "Deploy to this space",
+            "description": "Deploy to this IBM Cloud space",
             "type": "string"
         }
     },
     "required": [
         "suffix",
+        "deploy-region",
         "deploy-org",
         "deploy-space"
         ],
@@ -36,12 +41,16 @@
         },
         {
             "type": "table",
-            "columnCount": 3,
+            "columnCount": 4,
             "widths": ["30%", "35%", "35%"],
             "items": [
                 {
                     "type": "label",
                     "title": ""
+                },
+                {
+                    "type": "label",
+                    "title": "Region"
                 },
                 {
                     "type": "label",
@@ -54,6 +63,10 @@
                 {
                     "type": "label",
                     "title": "Deploy to"
+                },
+                {
+                    "type": "select",
+                    "key": "deploy-region"
                 },
                 {
                     "type": "select",

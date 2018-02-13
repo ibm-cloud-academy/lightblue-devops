@@ -36,7 +36,7 @@ stages:
   - name: Deploy Customer Microservice
     type: deployer
     target:
-      region_id: ibm:yp:us-south
+      region_id: ${REGION}
       organization: ${ORG}
       space: ${SPACE}
       application: ${APP_NAME}
