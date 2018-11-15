@@ -44,7 +44,7 @@ stages:
     SUFFIX: ${SUFFIX}
     script: |-
         #!/bin/bash
-        cf push $APP_NAME -n $APP_NAME
+        cf push $APP_NAME -n $APP_NAME -m 256M
 hooks:
 - enabled: true
   label: null
