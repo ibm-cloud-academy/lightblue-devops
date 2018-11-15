@@ -96,7 +96,7 @@ deploy:
     suffix: ""
     deploy-org: "{{organization}}"
     deploy-space: "dev"
-    deploy-region: "US-South"
+    deploy-region: "us-south"
     mysql-servers-us: "9.1.2.3:5674"
     inventory-db: "inventorydb"
     inventory-dbuser: "dbuser"
