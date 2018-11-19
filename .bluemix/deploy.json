@@ -9,24 +9,24 @@
             "description": "Deployment suffix",
             "type": "string"
         },
-        "deploy-region": {
+        "dev-region": {
             "description": "Deploy to this IBM Cloud Region",
             "type": "string"
         },
-        "deploy-org": {
+        "dev-org": {
             "description": "Deploy to this IBM Cloud Organization",
             "type": "string"
         },
-        "deploy-space": {
+        "dev-space": {
             "description": "Deploy to this IBM Cloud space",
             "type": "string"
         }
     },
     "required": [
         "suffix",
-        "deploy-region",
-        "deploy-org",
-        "deploy-space"
+        "dev-region",
+        "dev-org",
+        "dev-space"
         ],
     "form": [
         {
@@ -66,15 +66,15 @@
                 },
                 {
                     "type": "select",
-                    "key": "deploy-region"
+                    "key": "dev-region"
                 },
                 {
                     "type": "select",
-                    "key": "deploy-org"
+                    "key": "dev-org"
                 },
                 {
                     "type": "select",
-                    "key": "deploy-space",
+                    "key": "dev-space",
                     "readonly": false
                 }
             ]
