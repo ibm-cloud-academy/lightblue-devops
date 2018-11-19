@@ -11,9 +11,6 @@ template:
     - pipeline-lightblue-catalog
     - form
 
-toolchain:
-  name: lightbluecompute-devops
-
 services:
   # Github repos
   git-lightblue-web:
