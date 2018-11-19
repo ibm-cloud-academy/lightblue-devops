@@ -9,7 +9,10 @@ template:
     - pipeline-lightblue-web
     - pipeline-lightblue-customer
     - pipeline-lightblue-catalog
-    - form
+    - deploy
+
+toolchain:
+  name: lightbluecompute-devops
 
 services:
   # Github repos
@@ -53,11 +56,11 @@ services:
           $text: "lightblue-web.pipeline.yml"
         env:
           REPO: "git-lightblue-web"
-          CF_APP: "lightblue-web-{{form.pipeline.parameters.suffix}}"
-          API_KEY: "{{form.pipeline.parameters.api-key}}"
-          CF_SPACE: "{{form.pipeline.parameters.dev-space}}"
-          CF_ORGANIZATION: "{{form.pipeline.parameters.dev-organization}}"
-          REGION_ID: "{{form.pipeline.parameters.dev-region}}"
+          CF_APP: "lightblue-web-{{deploy.pipeline.parameters.suffix}}"
+          API_KEY: "{{deploy.pipeline.parameters.api-key}}"
+          CF_SPACE: "{{deploy.pipeline.parameters.dev-space}}"
+          CF_ORGANIZATION: "{{deploy.pipeline.parameters.dev-organization}}"
+          REGION_ID: "{{deploy.pipeline.parameters.dev-region}}"
         execute: false
 
   pipeline-lightblue-customer:
@@ -72,11 +75,11 @@ services:
           $text: "lightblue-customer.pipeline.yml"
         env:
           REPO: "git-lightblue-customer"
-          CF_APP: "lightblue-customer-{{form.pipeline.parameters.suffix}}"
-          API_KEY: "{{form.pipeline.parameters.api-key}}"
-          CF_SPACE: "{{form.pipeline.parameters.dev-space}}"
-          CF_ORGANIZATION: "{{form.pipeline.parameters.dev-organization}}"
-          REGION_ID: "{{form.pipeline.parameters.dev-region}}"
+          CF_APP: "lightblue-customer-{{deploy.pipeline.parameters.suffix}}"
+          API_KEY: "{{deploy.pipeline.parameters.api-key}}"
+          CF_SPACE: "{{deploy.pipeline.parameters.dev-space}}"
+          CF_ORGANIZATION: "{{deploy.pipeline.parameters.dev-organization}}"
+          REGION_ID: "{{deploy.pipeline.parameters.dev-region}}"
           PORT: "8080"
         execute: false
 
@@ -92,15 +95,15 @@ services:
           $text: "lightblue-catalog.pipeline.yml"
         env:
           REPO: "git-lightblue-catalog"
-          CF_APP: "lightblue-catalog-{{form.pipeline.parameters.suffix}}"
-          API_KEY: "{{form.pipeline.parameters.api-key}}"
-          CF_SPACE: "{{form.pipeline.parameters.dev-space}}"
-          CF_ORGANIZATION: "{{form.pipeline.parameters.dev-organization}}"
-          REGION_ID: "{{form.pipeline.parameters.dev-region}}"
+          CF_APP: "lightblue-catalog-{{deploy.pipeline.parameters.suffix}}"
+          API_KEY: "{{deploy.pipeline.parameters.api-key}}"
+          CF_SPACE: "{{deploy.pipeline.parameters.dev-space}}"
+          CF_ORGANIZATION: "{{deploy.pipeline.parameters.dev-organization}}"
+          REGION_ID: "{{deploy.pipeline.parameters.dev-region}}"
           PORT: "9080, 8080"
-          MYSQL_JDBC_URL_US: "jdbc:mysql://{{form.parameters.mysql-servers-us}}/{{form.parameters.inventory-db}}"
-          MYSQL_USER: "{{form.parameters.inventory-dbuser}}"
-          MYSQL_PASSWORD: "{{form.parameters.inventory-dbpass}}"
+          MYSQL_JDBC_URL_US: "jdbc:mysql://{{deploy.parameters.mysql-servers-us}}/{{deploy.parameters.inventory-db}}"
+          MYSQL_USER: "{{deploy.parameters.inventory-dbuser}}"
+          MYSQL_PASSWORD: "{{deploy.parameters.inventory-dbpass}}"
         execute: false
 
   #Web IDE
