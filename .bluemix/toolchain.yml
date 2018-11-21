@@ -20,7 +20,7 @@ services:
     service_id: hostedgit
     parameters:
       repo_url: "https://github.com/ibm-cloud-academy/lightblue-web"
-      repo_name: "lightblue-web"
+      repo_name: "lightblue-web-{{name}}"
       type: clone
       has_issues: true
       enable_traceability: true
@@ -29,7 +29,7 @@ services:
       service_id: hostedgit
       parameters:
         repo_url: "https://github.com/ibm-cloud-academy/lightblue-customer"
-        repo_name: "lightblue-customer"
+        repo_name: "lightblue-customer-{{name}}"
         type: clone
         has_issues: true
         enable_traceability: true
@@ -38,7 +38,7 @@ services:
       service_id: hostedgit
       parameters:
         repo_url: "https://github.com/ibm-cloud-academy/lightblue-catalog"
-        repo_name: "lightblue-catalog"
+        repo_name: "lightblue-catalog-{{name}}"
         type: clone
         has_issues: true
         enable_traceability: true
@@ -55,6 +55,7 @@ services:
         content:
           $text: "lightblue-web.pipeline.yml"
         env:
+          SUFFIX: "{{deploy.parameters.suffix}}"
           REPO: "git-lightblue-web"
           CF_APP: "lightblue-web-{{deploy.pipeline.parameters.suffix}}"
           API_KEY: "{{deploy.pipeline.parameters.api-key}}"
@@ -74,6 +75,7 @@ services:
         content:
           $text: "lightblue-customer.pipeline.yml"
         env:
+          SUFFIX: "{{deploy.parameters.suffix}}"
           REPO: "git-lightblue-customer"
           CF_APP: "lightblue-customer-{{deploy.pipeline.parameters.suffix}}"
           API_KEY: "{{deploy.pipeline.parameters.api-key}}"
@@ -94,6 +96,7 @@ services:
         content:
           $text: "lightblue-catalog.pipeline.yml"
         env:
+          SUFFIX: "{{deploy.parameters.suffix}}"
           REPO: "git-lightblue-catalog"
           CF_APP: "lightblue-catalog-{{deploy.pipeline.parameters.suffix}}"
           API_KEY: "{{deploy.pipeline.parameters.api-key}}"
