@@ -38,15 +38,15 @@ stages:
     type: deployer
     deploy_permission: DEV_IN_SPACE
     target:
-      region_id: ${REGION}
-      organization: ${ORG}
-      space: ${SPACE}
+      region_id: ${REGION_ID}
+      organization: ${CF_ORGANIZATION}
+      space: ${CF_SPACE}
     PORT: ${PORT}
     SUFFIX: ${SUFFIX}
     script: |-
         #!/bin/sh
         echo "Deploying $APP_NAME using $SUFFIX"
-        cf push ${APP_NAME} -n ${APP_NAME} -m 256M
+        cf push ${APP_NAME} -m 256M
 hooks:
 - enabled: true
   label: null
