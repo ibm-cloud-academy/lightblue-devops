@@ -38,13 +38,13 @@ stages:
     type: deployer
     deploy_permission: DEV_IN_SPACE
     target:
-      region_id: ${REGION}
-      organization: ${ORG}
-      space: ${SPACE}
+      region_id: ${REGION_ID}
+      organization: ${CF_ORGANIZATION}
+      space: ${CF_SPACE}
       application: ${APP_NAME}
     script: |
       #!/bin/bash
-      cf push $APP_NAME -n $APP_NAME -m 256M
+      cf push $APP_NAME -m 256M
 hooks:
 - enabled: true
   label: null
