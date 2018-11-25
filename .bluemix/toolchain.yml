@@ -53,12 +53,11 @@ services:
       ui-pipeline: true
       configuration:
         content:
-          $file: "lightblue-web.pipeline.yml"
+          $text: "lightblue-web.pipeline.yml"
         env:
           SUFFIX: "{{deploy.parameters.suffix}}"
           REPO: "git-lightblue-web"
           CF_APP: "lightblue-web-{{deploy.pipeline.parameters.suffix}}"
-          API_KEY: "{{deploy.pipeline.parameters.api-key}}"
           CF_SPACE: "{{deploy.pipeline.parameters.dev-space}}"
           CF_ORGANIZATION: "{{deploy.pipeline.parameters.dev-organization}}"
           REGION_ID: "{{deploy.pipeline.parameters.dev-region}}"
@@ -73,12 +72,11 @@ services:
       ui-pipeline: true
       configuration:
         content:
-          $file: "lightblue-customer.pipeline.yml"
+          $text: "lightblue-customer.pipeline.yml"
         env:
           SUFFIX: "{{deploy.parameters.suffix}}"
           REPO: "git-lightblue-customer"
           CF_APP: "lightblue-customer-{{deploy.pipeline.parameters.suffix}}"
-          API_KEY: "{{deploy.pipeline.parameters.api-key}}"
           CF_SPACE: "{{deploy.pipeline.parameters.dev-space}}"
           CF_ORGANIZATION: "{{deploy.pipeline.parameters.dev-organization}}"
           REGION_ID: "{{deploy.pipeline.parameters.dev-region}}"
@@ -94,12 +92,11 @@ services:
       ui-pipeline: true
       configuration:
         content:
-          $file: "lightblue-catalog.pipeline.yml"
+          $text: "lightblue-catalog.pipeline.yml"
         env:
           SUFFIX: "{{deploy.parameters.suffix}}"
           REPO: "git-lightblue-catalog"
           CF_APP: "lightblue-catalog-{{deploy.pipeline.parameters.suffix}}"
-          API_KEY: "{{deploy.pipeline.parameters.api-key}}"
           CF_SPACE: "{{deploy.pipeline.parameters.dev-space}}"
           CF_ORGANIZATION: "{{deploy.pipeline.parameters.dev-organization}}"
           REGION_ID: "{{deploy.pipeline.parameters.dev-region}}"
@@ -121,7 +118,6 @@ deploy:
     parameters:
       suffix: ""
       dev-region: "{{region}}"
-      api-key: "{{api-key}}"
       dev-space: "dev"
       dev-organization: "{{organization}}"
       mysql-servers-us: "9.1.2.3:5674"
