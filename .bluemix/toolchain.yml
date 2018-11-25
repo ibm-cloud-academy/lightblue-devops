@@ -12,7 +12,7 @@ template:
     - deploy
 
 toolchain:
-  name: lightbluecompute-devops
+  name: 'lightbluecompute-devops-{{timestamp}}'
 
 services:
   # Github repos
@@ -20,7 +20,7 @@ services:
     service_id: hostedgit
     parameters:
       repo_url: "https://github.com/ibm-cloud-academy/lightblue-web"
-      repo_name: "lightblue-web-{{name}}"
+      repo_name: "lightblue-web-{{timestamp}}"
       type: clone
       has_issues: true
       enable_traceability: true
@@ -29,7 +29,7 @@ services:
       service_id: hostedgit
       parameters:
         repo_url: "https://github.com/ibm-cloud-academy/lightblue-customer"
-        repo_name: "lightblue-customer-{{name}}"
+        repo_name: "lightblue-customer-{{timestamp}}"
         type: clone
         has_issues: true
         enable_traceability: true
@@ -38,7 +38,7 @@ services:
       service_id: hostedgit
       parameters:
         repo_url: "https://github.com/ibm-cloud-academy/lightblue-catalog"
-        repo_name: "lightblue-catalog-{{name}}"
+        repo_name: "lightblue-catalog-{{timestamp}}"
         type: clone
         has_issues: true
         enable_traceability: true
@@ -49,11 +49,11 @@ services:
     parameters:
       services:
         - git-lightblue-web
-      name: "lightblue-web"
+      name: "pipeline-lightblue-web-{{timestamp}}"
       ui-pipeline: true
       configuration:
         content:
-          $text: "lightblue-web.pipeline.yml"
+          $file: "lightblue-web.pipeline.yml"
         env:
           SUFFIX: "{{deploy.parameters.suffix}}"
           REPO: "git-lightblue-web"
@@ -69,11 +69,11 @@ services:
     parameters:
       services:
         - git-lightblue-customer
-      name: "lightblue-customer"
+      name: "pipeline-lightblue-customer-{{timestamp}}"
       ui-pipeline: true
       configuration:
         content:
-          $text: "lightblue-customer.pipeline.yml"
+          $file: "lightblue-customer.pipeline.yml"
         env:
           SUFFIX: "{{deploy.parameters.suffix}}"
           REPO: "git-lightblue-customer"
@@ -90,11 +90,11 @@ services:
     parameters:
       services:
         - git-lightblue-catalog
-      name: "lightblue-catalog"
+      name: "pipeline-lightblue-catalog-{{timestamp}}"
       ui-pipeline: true
       configuration:
         content:
-          $text: "lightblue-catalog.pipeline.yml"
+          $file: "lightblue-catalog.pipeline.yml"
         env:
           SUFFIX: "{{deploy.parameters.suffix}}"
           REPO: "git-lightblue-catalog"
