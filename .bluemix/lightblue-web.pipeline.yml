@@ -42,7 +42,6 @@ stages:
       organization: ${CF_ORGANIZATION}
       space: ${CF_SPACE}
       application: ${CF_APP}
-      api_key: ${API_KEY}
     script: |
       #!/bin/bash
       cf push $CF_APP -m 256M
