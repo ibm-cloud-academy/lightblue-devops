@@ -9,7 +9,7 @@ template:
     - pipeline-lightblue-catalog
 
 toolchain:
-  name: lightbluecompute-devops
+  name: "lightbluecompute-devops-{{timestamp}}"
 
 services:
   # Github repos
