@@ -42,12 +42,12 @@ stages:
       organization: ${CF_ORGANIZATION}
       space: ${CF_SPACE}
       application: ${CF_APP}
+      api_key: ${API_KEY}
     script: |
       #!/bin/bash
-      cf push $CF_APP -m 256M
+      cf push $APP_NAME -n $APP_NAME -m 256M
 hooks:
 - enabled: true
   label: null
   ssl_enabled: false
-  url: https://devops-api.ng.bluemix.net/v1/messaging/webhook/publish
-
+  url: http://lms-api/v1/messaging/webhook/publish

@@ -13,7 +13,7 @@
             "description": "Deploy to this IBM Cloud Region",
             "type": "string"
         },
-        "dev-org": {
+        "dev-organization": {
             "description": "Deploy to this IBM Cloud Organization",
             "type": "string"
         },
@@ -24,8 +24,9 @@
     },
     "required": [
         "suffix",
+        "api-key",
         "dev-region",
-        "dev-org",
+        "dev-organization",
         "dev-space"
         ],
     "form": [
@@ -40,14 +41,16 @@
             "key": "suffix"
         },
         {
+	        "type": "password",
+	        "readonly": false,
+	        "title": "API key",
+	        "key": "api-key"
+        },
+        {
             "type": "table",
-            "columnCount": 4,
-            "widths": ["30%", "35%", "35%"],
+            "columnCount": 3,
+            "widths": ["33%", "33%", "34%"],
             "items": [
-                {
-                    "type": "label",
-                    "title": ""
-                },
                 {
                     "type": "label",
                     "title": "Region"
@@ -61,16 +64,12 @@
                     "title": "Space"
                 },
                 {
-                    "type": "label",
-                    "title": "Deploy to"
-                },
-                {
                     "type": "select",
                     "key": "dev-region"
                 },
                 {
                     "type": "select",
-                    "key": "dev-org"
+                    "key": "dev-organization"
                 },
                 {
                     "type": "select",

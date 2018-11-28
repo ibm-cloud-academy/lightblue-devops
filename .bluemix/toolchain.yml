@@ -3,42 +3,39 @@ template:
   name: "LightBlueCompute Toolchain v2"
   description: "LightBlueCompute cloud-native application"
   required:
-    - git-lightblue-web
-    - git-lightblue-customer
-    - git-lightblue-catalog
+    - form
     - pipeline-lightblue-web
     - pipeline-lightblue-customer
     - pipeline-lightblue-catalog
-    - deploy
 
 toolchain:
-  name: 'lightbluecompute-devops-{{timestamp}}'
+  name: lightbluecompute-devops
 
 services:
   # Github repos
   git-lightblue-web:
-    service_id: hostedgit
+    service_id: githubpublic
     parameters:
       repo_url: "https://github.com/ibm-cloud-academy/lightblue-web"
-      repo_name: "lightblue-web-{{timestamp}}"
+      repo_name: "lightblue-web-{{form.pipeline.parameters.suffix}}"
       type: clone
       has_issues: true
       enable_traceability: true
 
   git-lightblue-customer:
-      service_id: hostedgit
+      service_id: githubpublic
       parameters:
         repo_url: "https://github.com/ibm-cloud-academy/lightblue-customer"
-        repo_name: "lightblue-customer-{{timestamp}}"
+        repo_name: "lightblue-customer-{{form.pipeline.parameters.suffix}}"
         type: clone
         has_issues: true
         enable_traceability: true
 
   git-lightblue-catalog:
-      service_id: hostedgit
+      service_id: githubpublic
       parameters:
         repo_url: "https://github.com/ibm-cloud-academy/lightblue-catalog"
-        repo_name: "lightblue-catalog-{{timestamp}}"
+        repo_name: "lightblue-catalog-{{form.pipeline.parameters.suffix}}"
         type: clone
         has_issues: true
         enable_traceability: true
@@ -49,18 +46,19 @@ services:
     parameters:
       services:
         - git-lightblue-web
-      name: "pipeline-lightblue-web-{{timestamp}}"
+      name: "lightblue-web"
       ui-pipeline: true
       configuration:
         content:
           $text: "lightblue-web.pipeline.yml"
         env:
-          SUFFIX: "{{deploy.parameters.suffix}}"
           REPO: "git-lightblue-web"
-          CF_APP: "lightblue-web-{{deploy.pipeline.parameters.suffix}}"
-          CF_SPACE: "{{deploy.pipeline.parameters.dev-space}}"
-          CF_ORGANIZATION: "{{deploy.pipeline.parameters.dev-organization}}"
-          REGION_ID: "{{deploy.pipeline.parameters.dev-region}}"
+          SUFFIX: "{{form.pipeline.parameters.suffix}}"
+          CF_APP: "lightblue-web-{{form.pipeline.parameters.suffix}}"
+          API_KEY: "{{form.pipeline.parameters.api-key}}"
+          CF_SPACE: "{{form.pipeline.parameters.dev-space}}"
+          CF_ORGANIZATION: "{{form.pipeline.parameters.dev-organization}}"
+          REGION_ID: "{{form.pipeline.parameters.dev-region}}"
         execute: false
 
   pipeline-lightblue-customer:
@@ -68,18 +66,19 @@ services:
     parameters:
       services:
         - git-lightblue-customer
-      name: "pipeline-lightblue-customer-{{timestamp}}"
+      name: "lightblue-customer"
       ui-pipeline: true
       configuration:
         content:
           $text: "lightblue-customer.pipeline.yml"
         env:
-          SUFFIX: "{{deploy.parameters.suffix}}"
           REPO: "git-lightblue-customer"
-          CF_APP: "lightblue-customer-{{deploy.pipeline.parameters.suffix}}"
-          CF_SPACE: "{{deploy.pipeline.parameters.dev-space}}"
-          CF_ORGANIZATION: "{{deploy.pipeline.parameters.dev-organization}}"
-          REGION_ID: "{{deploy.pipeline.parameters.dev-region}}"
+          SUFFIX: "{{form.pipeline.parameters.suffix}}"
+          CF_APP: "lightblue-customer-{{form.pipeline.parameters.suffix}}"
+          API_KEY: "{{form.pipeline.parameters.api-key}}"
+          CF_SPACE: "{{form.pipeline.parameters.dev-space}}"
+          CF_ORGANIZATION: "{{form.pipeline.parameters.dev-organization}}"
+          REGION_ID: "{{form.pipeline.parameters.dev-region}}"
           PORT: "8080"
         execute: false
 
@@ -88,22 +87,23 @@ services:
     parameters:
       services:
         - git-lightblue-catalog
-      name: "pipeline-lightblue-catalog-{{timestamp}}"
+      name: "lightblue-catalog"
       ui-pipeline: true
       configuration:
         content:
           $text: "lightblue-catalog.pipeline.yml"
         env:
-          SUFFIX: "{{deploy.parameters.suffix}}"
           REPO: "git-lightblue-catalog"
-          CF_APP: "lightblue-catalog-{{deploy.pipeline.parameters.suffix}}"
-          CF_SPACE: "{{deploy.pipeline.parameters.dev-space}}"
-          CF_ORGANIZATION: "{{deploy.pipeline.parameters.dev-organization}}"
-          REGION_ID: "{{deploy.pipeline.parameters.dev-region}}"
+          SUFFIX: "{{form.pipeline.parameters.suffix}}"
+          CF_APP: "lightblue-catalog-{{form.pipeline.parameters.suffix}}"
+          API_KEY: "{{form.pipeline.parameters.api-key}}"
+          CF_SPACE: "{{form.pipeline.parameters.dev-space}}"
+          CF_ORGANIZATION: "{{form.pipeline.parameters.dev-organization}}"
+          REGION_ID: "{{form.pipeline.parameters.dev-region}}"
           PORT: "9080, 8080"
-          MYSQL_JDBC_URL_US: "jdbc:mysql://{{deploy.parameters.mysql-servers-us}}/{{deploy.parameters.inventory-db}}"
-          MYSQL_USER: "{{deploy.parameters.inventory-dbuser}}"
-          MYSQL_PASSWORD: "{{deploy.parameters.inventory-dbpass}}"
+          MYSQL_JDBC_URL_US: "jdbc:mysql://{{form.parameters.mysql-servers-us}}/{{form.parameters.inventory-db}}"
+          MYSQL_USER: "{{form.parameters.inventory-dbuser}}"
+          MYSQL_PASSWORD: "{{form.parameters.inventory-dbpass}}"
         execute: false
 
   #Web IDE
@@ -111,15 +111,16 @@ services:
     service_id: orion
 
 #Deployment
-deploy:
+form:
   pipeline:
     schema:
       $ref: deploy.json
     parameters:
-      suffix: ""
-      dev-region: "{{region}}"
-      dev-space: "dev"
-      dev-organization: "{{organization}}"
+      suffix: "{{suffix}}"
+      dev-region: "{{dev-region}}"
+      api-key: "{{api-key}}"
+      dev-space: "{{dev-space}}"
+      dev-organization: "{{dev-org}}"
       mysql-servers-us: "9.1.2.3:5674"
       inventory-db: "inventorydb"
       inventory-dbuser: "dbuser"
