@@ -17,7 +17,7 @@ services:
     service_id: githubpublic
     parameters:
       repo_url: "https://github.com/ibm-cloud-academy/lightblue-web"
-      repo_name: "lightblue-web-{{form.pipeline.parameters.suffix}}"
+      repo_name: "lightblue-web-{{timestamp}}"
       type: clone
       has_issues: true
       enable_traceability: true
@@ -26,7 +26,7 @@ services:
       service_id: githubpublic
       parameters:
         repo_url: "https://github.com/ibm-cloud-academy/lightblue-customer"
-        repo_name: "lightblue-customer-{{form.pipeline.parameters.suffix}}"
+        repo_name: "lightblue-customer-{{timestamp}}"
         type: clone
         has_issues: true
         enable_traceability: true
@@ -35,7 +35,7 @@ services:
       service_id: githubpublic
       parameters:
         repo_url: "https://github.com/ibm-cloud-academy/lightblue-catalog"
-        repo_name: "lightblue-catalog-{{form.pipeline.parameters.suffix}}"
+        repo_name: "lightblue-catalog-{{timestamp}}"
         type: clone
         has_issues: true
         enable_traceability: true
